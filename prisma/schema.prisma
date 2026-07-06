@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Memo {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  filename    String?
+  duration    Float?
+  transcript  String
+  summary     String?
+  extraction  String   // JSON blob
+  hasFlags    Boolean  @default(false)
+  flagAcked   Boolean  @default(false)
+  embeddingId String?
+
+  @@map("memos")
+}

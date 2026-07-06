@@ -1,0 +1,37 @@
+{
+  "memos": [
+    {
+      "id": "6067581e-0fa8-4416-af9c-d21ba4722e05",
+      "createdAt": "2026-07-01T00:01:28.331Z",
+      "filename": "friday-review-2025-07-01.mp3",
+      "duration": 300,
+      "transcript": "Friday review. Sarah: July 7th too risky — docs QA failed two checks. Tunde: Hit Node 18 breaking changes in auth library. July 7th is off the table. Marcus: Go back to July 14th — hold the line. Tunde: Agreed, July 14th. I can finish Node 18 by July 10th. Sarah: Docs QA signed off by July 11th. Marcus: Need QA to sign off on Node 18 regression suite — that is a hard gate.",
+      "summary": "4 decisions · 3 action items · July 14th restored",
+      "extraction": "{\"decisions\":[{\"text\":\"v2 launch date restored to July 14th — July 7th target dropped due to docs QA failures and Node 18 breaking changes\",\"made_by\":\"Full team\",\"date_mentioned\":\"July 1\"},{\"text\":\"Node 18 will be included in v2 — must complete by July 10th with buffer before launch\",\"made_by\":\"Tunde\",\"date_mentioned\":\"July 1\"},{\"text\":\"QA sign-off on Node 18 regression suite is a hard gate for v2 launch\",\"made_by\":\"Full team\",\"date_mentioned\":\"July 1\"},{\"text\":\"API docs QA to be signed off by July 11th\",\"made_by\":\"Sarah\",\"date_mentioned\":\"July 1\"}],\"action_items\":[{\"task\":\"Complete Node 18 upgrade\",\"owner\":\"Tunde\",\"deadline\":\"July 10\",\"status\":\"closed\"},{\"task\":\"Get docs QA signed off\",\"owner\":\"Sarah\",\"deadline\":\"July 11\",\"status\":\"closed\"},{\"task\":\"Schedule QA regression run for Node 18\",\"owner\":\"Marcus\",\"deadline\":\"Before July 12\",\"status\":\"closed\"}],\"open_questions\":[{\"question\":\"Has QA been briefed on the Node 18 regression scope?\",\"blocking\":true}],\"commitments\":[{\"person\":\"Tunde\",\"commitment\":\"Node 18 upgrade complete\",\"deadline\":\"July 10\"},{\"person\":\"Sarah\",\"commitment\":\"Docs QA sign-off\",\"deadline\":\"July 11\"},{\"person\":\"Marcus\",\"commitment\":\"QA regression run scheduled\",\"deadline\":\"Before July 12\"}],\"flags\":[]}",
+      "hasFlags": false,
+      "flagAcked": false
+    },
+    {
+      "id": "ced82182-2610-49f7-adf8-c2b1717842a4",
+      "createdAt": "2026-06-28T02:01:28.331Z",
+      "filename": "standup-2025-06-28.mp3",
+      "duration": 180,
+      "transcript": "Tunde: I actually started the Node 18 upgrade this week. I know we said next sprint, but it is going better than expected. Also the CEO wants to move launch to July 7th. Sarah: That is a week earlier than July 14th — docs QA review is not done. Marcus: DB migration done, CDN is live. Tunde: Targeting July 7th, reassess Friday. Sarah: Flagging as risk.",
+      "summary": "1 decision · 2 action items · ⚠ conflict flagged",
+      "extraction": "{\"decisions\":[{\"text\":\"Targeting July 7th for v2 launch — one week earlier than previously agreed July 14th\",\"made_by\":\"Tunde (per CEO directive)\",\"date_mentioned\":\"June 28\"},{\"text\":\"Node 18 upgrade re-started — previously deferred to next sprint\",\"made_by\":\"Tunde\",\"date_mentioned\":\"June 28\"}],\"action_items\":[{\"task\":\"Reassess launch date on Friday\",\"owner\":\"Team\",\"deadline\":\"Friday June 30\",\"status\":\"open\"},{\"task\":\"Complete API docs QA review\",\"owner\":\"Sarah\",\"deadline\":\"Before July 7\",\"status\":\"open\"}],\"open_questions\":[{\"question\":\"Is July 7th realistic given the docs QA backlog?\",\"blocking\":true},{\"question\":\"Is Node 18 safe to ship by July 7th?\",\"blocking\":true}],\"commitments\":[{\"person\":\"Tunde\",\"commitment\":\"Node 18 upgrade before launch\",\"deadline\":\"July 7\"}],\"flags\":[{\"type\":\"conflict\",\"description\":\"Launch date conflict: July 14th was decided in the June 24 standup, now being moved to July 7th without formal team alignment\",\"prior_decision\":\"v2 launch date set to July 14th\"},{\"type\":\"conflict\",\"description\":\"Node 18 contradiction: Tunde committed to Node 16 for v2 on June 24, but has now restarted the Node 18 upgrade targeting the same launch\",\"prior_decision\":\"Commit to Node 16 for v2 launch — Node 18 migration deferred to next sprint\"},{\"type\":\"risk\",\"description\":\"API documentation QA review not complete — Sarah flagged this as a risk to the July 7th target\"}]}",
+      "hasFlags": true,
+      "flagAcked": true
+    },
+    {
+      "id": "7f2e2eeb-0384-4f18-8f13-16e1218419c4",
+      "createdAt": "2026-06-24T02:01:28.331Z",
+      "filename": "standup-2025-06-24.mp3",
+      "duration": 240,
+      "transcript": "Good morning team. Quick standup. Tunde: I am pushing the Node 18 migration to next sprint — committing to Node 16 for the v2 launch. Sarah: v2 launches July 14th. I own API docs, done by end of week. Marcus: Backend tests green. I am on the DB migration script, done by June 28th. CDN setup is a blocker — Marcus takes it, done by June 27th.",
+      "summary": "3 decisions · 4 action items · Node 16 confirmed for v2",
+      "extraction": "{\"decisions\":[{\"text\":\"Commit to Node 16 for v2 launch — Node 18 migration deferred to next sprint\",\"made_by\":\"Tunde, agreed by team\",\"date_mentioned\":\"June 24\"},{\"text\":\"v2 launch date set to July 14th\",\"made_by\":\"Sarah\",\"date_mentioned\":\"June 24\"},{\"text\":\"Sarah owns API documentation\",\"made_by\":\"Sarah\",\"date_mentioned\":\"June 24\"}],\"action_items\":[{\"task\":\"Push API documentation\",\"owner\":\"Sarah\",\"deadline\":\"End of week (June 28)\",\"status\":\"closed\"},{\"task\":\"Complete database migration script\",\"owner\":\"Marcus\",\"deadline\":\"June 28\",\"status\":\"closed\"},{\"task\":\"Set up CDN for staging environment\",\"owner\":\"Marcus\",\"deadline\":\"June 27\",\"status\":\"closed\"},{\"task\":\"Defer Node 18 migration to next sprint\",\"owner\":\"Tunde\",\"deadline\":\"Next sprint planning\",\"status\":\"open\"}],\"open_questions\":[{\"question\":\"Who handles CDN setup for staging?\",\"blocking\":true}],\"commitments\":[{\"person\":\"Sarah\",\"commitment\":\"API docs complete\",\"deadline\":\"End of week (June 28)\"},{\"person\":\"Marcus\",\"commitment\":\"DB migration script complete\",\"deadline\":\"June 28\"},{\"person\":\"Marcus\",\"commitment\":\"CDN configuration\",\"deadline\":\"June 27\"},{\"person\":\"Tunde\",\"commitment\":\"Node 16 for v2 launch\",\"deadline\":\"July 14\"}],\"flags\":[]}",
+      "hasFlags": false,
+      "flagAcked": false
+    }
+  ]
+}
