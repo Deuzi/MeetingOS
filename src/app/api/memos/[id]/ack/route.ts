@@ -8,6 +8,6 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  ackMemoFlag(id);
+  await ackMemoFlag(id);
   return NextResponse.json({ ok: true });
 }

@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     const { question } = await req.json();
     if (!question) return NextResponse.json({ error: "No question" }, { status: 400 });
 
-    const allMemos = getMemos();
+    const allMemos = await getMemos();
 
     if (allMemos.length === 0) {
       return NextResponse.json({

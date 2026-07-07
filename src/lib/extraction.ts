@@ -49,7 +49,7 @@ export async function extractFromTranscript(
 
   // Step 2: Filter prior memos to only RELATED ones
   try {
-    const priorMemos = getMemos().filter((m) => m.id !== memoId);
+    const priorMemos = (await getMemos()).filter((m) => m.id !== memoId);
 
     if (priorMemos.length > 0) {
       // Ask BTL to score each prior memo for relevance to this new transcript

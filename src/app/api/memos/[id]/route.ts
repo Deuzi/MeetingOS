@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const memo = getMemoById(id);
+  const memo = await getMemoById(id);
   if (!memo) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json({ memo });
 }
@@ -18,6 +18,6 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  deleteMemo(id);
+  await deleteMemo(id);
   return NextResponse.json({ ok: true });
 }

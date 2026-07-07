@@ -9,7 +9,6 @@ export const maxDuration = 60;
 export async function POST(req: NextRequest) {
   try {
     const { transcript, filename, duration } = await req.json();
-
     if (!transcript) {
       return NextResponse.json({ error: "No transcript" }, { status: 400 });
     }
@@ -18,7 +17,7 @@ export async function POST(req: NextRequest) {
     const { extraction, summary } = await extractFromTranscript(transcript, memoId);
     const hasFlags = extraction.flags.some((f) => f.type === "conflict");
 
-    const memo = createMemo({
+    const memo = await createMemo({
       id: memoId,
       filename,
       duration,

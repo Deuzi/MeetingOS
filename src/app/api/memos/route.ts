@@ -4,6 +4,6 @@ import { getMemos } from "@/lib/db";
 export const runtime = "nodejs";
 
 export async function GET() {
-  const memos = getMemos();
+  const memos = await getMemos();
   return NextResponse.json({ memos });
 }

@@ -9,6 +9,6 @@ export async function POST(
 ) {
   const { id } = await params;
   const { taskIndex, status } = await req.json();
-  updateActionStatus(id, taskIndex, status);
+  await updateActionStatus(id, taskIndex, status);
   return NextResponse.json({ ok: true });
 }
