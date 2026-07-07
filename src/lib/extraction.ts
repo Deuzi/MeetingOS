@@ -59,11 +59,11 @@ export async function extractFromTranscript(
         messages: [
           {
             role: "system",
-            content: `You determine if meeting transcripts are about the same project or topic.
+            content: `You determine if meeting transcripts could be from the same team or organization.
 
-Given a new meeting transcript and a list of prior meeting summaries, return a JSON array of memo IDs that are clearly about the SAME project, team, or subject matter as the new transcript.
+Given a new meeting transcript and a list of prior meeting summaries, return a JSON array of memo IDs that are plausibly related — same team, same company, same project, overlapping people, or similar subject matter.
 
-Only include memos that share clear context — same project name, same people, same product, same goals. If it is a different project, different team, or unrelated topic, exclude it.
+Be LENIENT — if there is any reasonable chance two memos are from the same team or context, include the ID. Only exclude memos that are clearly about a completely different organization or unrelated domain.
 
 Return ONLY a JSON array of matching IDs: ["id1", "id2"] or [] if none match. No preamble.`,
           },
@@ -78,7 +78,11 @@ Return ONLY a JSON array of matching IDs: ["id1", "id2"] or [] if none match. No
       const cleaned = raw.replace(/```json|```/g, "").trim();
       const relatedIds: string[] = JSON.parse(cleaned);
 
-      const relatedMemos = priorMemos.filter((m) => relatedIds.includes(m.id));
+      // If relevance check returns nothing, fall back to all prior memos
+      const relatedMemos = relatedIds.length > 0
+        ? priorMemos.filter((m) => relatedIds.includes(m.id))
+        : priorMemos;
+
 
       // Step 3: Only run contradiction check against related memos
       if (relatedMemos.length > 0) {
