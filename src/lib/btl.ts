@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 // BTL Runtime client (chat completions + embeddings)
 export const btlClient = new OpenAI({
-  apiKey: "gw_chimdisl_931db30f7dfe7e6eb6d1a6a69dc55c91de28025f1b6b0ed6",
+  apiKey: process.env.BTL_RUNTIME_API_KEY!,
   baseURL: "https://api.badtheorylabs.com/v1",
 });
 

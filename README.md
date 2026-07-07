@@ -15,10 +15,10 @@ npm install
 Copy `.env.example` to `.env` and fill in your keys:
 
 ```
-DATABASE_URL="file:./dev.db"
-BTL_RUNTIME_BASE_URL="https://runtime.badtheorylabs.com"
+UPSTASH_REDIS_REST_URL="your-upstash-redis-rest-url"
+UPSTASH_REDIS_REST_TOKEN="your-upstash-redis-rest-token"
 BTL_RUNTIME_API_KEY="your-btl-key"
-OPENAI_API_KEY="sk-..."     # used only for Whisper transcription
+OPENAI_API_KEY="sk-..."     # used only for Whisper transcription (routed via Groq's OpenAI-compatible endpoint)
 ```
 
 ## Seed demo data (for hackathon demo)
@@ -54,19 +54,34 @@ AudioCapture               /api/transcribe  → OpenAI Whisper
   └─ upload audio                           → BTL Runtime embeddings
                                             → in-memory vector store
                                             → contradiction check (BTL Runtime)
-                           /api/memos/*     → JSON file store (data/meetingos.json)
+                           /api/memos/*     → Upstash Redis (meetingos:memos key)
                            /api/query       → BTL Runtime chat + vector retrieval
 ```
 
-**Storage:** `data/meetingos.json` (flat JSON, swap for SQLite/Prisma when Prisma binary downloads are available in your deploy target). Vector store is in-memory per process — swap `src/lib/vectorstore.ts` for ChromaDB for persistence across restarts.
+**Storage:** [Upstash Redis](https://upstash.com/) via `@upstash/redis`, storing all memos as a single JSON array under the `meetingos:memos` key (see `src/lib/db.ts`). Vector store is in-memory per process — swap `src/lib/vectorstore.ts` for ChromaDB for persistence across restarts.
 
 ## Tech stack
 
 - Next.js 16 (App Router) + TypeScript
 - Tailwind CSS with custom design tokens
-- OpenAI SDK pointed at BTL Runtime base URL
+- OpenAI SDK pointed at BTL Runtime base URL for chat + embeddings (`btl-2` and `text-embedding-3-small`)
+- OpenAI SDK pointed at Groq's endpoint for Whisper transcription
 - In-memory vector store with cosine similarity (drop-in replace with `chromadb` npm client)
-- JSON file persistence (drop-in replace with Prisma + SQLite)
+- Upstash Redis for memo persistence (`@upstash/redis`)
+
+## BTL Runtime usage
+
+All meeting intelligence (extraction, relevance filtering, contradiction detection, and query answering) runs on **Bad Theory Labs' Runtime**, accessed via the OpenAI SDK pointed at `https://api.badtheorylabs.com/v1`.
+
+| Purpose | Model |
+|---|---|
+| Extraction (decisions, action items, commitments, flags) | `btl-2` |
+| Relevance filtering (which prior memos relate to a new transcript) | `btl-2` |
+| Contradiction detection | `btl-2` |
+| Query answering over meeting history | `btl-2` |
+| Vector embeddings for retrieval | `text-embedding-3-small` |
+
+Whisper transcription is handled separately via Groq's OpenAI-compatible endpoint (`OPENAI_API_KEY`, `https://api.groq.com/openai/v1`).
 
 ## Pixel Orb
 
